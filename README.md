@@ -10,9 +10,10 @@
 
 ## 폴더 구조
 
-```bash
+```
 algorithms-2026
 │
+├── algorithmsdesign
 │
 ├── README.md
 └── .gitignore
