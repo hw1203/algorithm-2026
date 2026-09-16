@@ -1,7 +1,8 @@
     package sort;
     import sort.basic.BubbleSort;
     import sort.basic.InsertionSort;
-    import sort.basic.SelectionSort;
+    import sort.common.MyList;
+    import sort.common.MySorter;
 
     public class SortMain{
         static void main() {
