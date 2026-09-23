@@ -1,8 +1,13 @@
 package app.student;
 
+import search.basic.IterBinarySearch;
+import search.basic.SequentialSearch;
+import search.common.MySearcher;
 import sort.basic.InsertionSort;
 import sort.common.MyList;
 import sort.common.MySorter;
+
+import java.util.Comparator;
 
 public class StudentMain {
 //     본인 포함, 이 클래스에 있는 학생 10명 리스트로 만들기
@@ -24,5 +29,17 @@ public class StudentMain {
         MySorter<Student> sorter = new InsertionSort<>();
         sorter.sort(studentList);
         MyList.println(studentList);
+
+        //순차검색 활용
+        MySearcher<Student> searcher = new IterBinarySearch<>();
+        Comparator<Student> comparator =
+                (s1, s2) ->s1.name().compareTo(s2.name());
+        Student student = new Student("1길동", 31, 1, 0.5);
+        int index = searcher.search(studentList, student, comparator);
+        if (index < 0) {
+            System.out.println("검색 결과가 없습니다");
+        } else {
+            System.out.println(index + "위치에 있습니다.");
+        }
     }
 }
