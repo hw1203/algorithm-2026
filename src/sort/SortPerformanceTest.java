@@ -1,5 +1,7 @@
 package sort;
 
+import sort.advanced.MergeSort;
+import sort.advanced.QuickSort;
 import sort.basic.BubbleSort;
 import sort.basic.InsertionSort;
 import sort.basic.SelectionSort;
@@ -11,7 +13,7 @@ import java.util.List;
 import java.util.Random;
 
 public class SortPerformanceTest {
-    static final int SIZE = 50_000;
+    static final int SIZE = 10_000;
 
     static void main() {
         Integer[] list = getList();
@@ -19,15 +21,19 @@ public class SortPerformanceTest {
         List<MySorter<Integer>> sorters = Arrays.asList(
                 new SelectionSort<>(),
                 new BubbleSort<>(),
-                new InsertionSort<>()
+                new InsertionSort<>(),
+                new QuickSort<>(),
+                new MergeSort<>()
         );
 
         for (MySorter<Integer> sorter: sorters){
             Integer[] copyList = Arrays.copyOf(list, list.length);
             measureTime(sorter, copyList);
-
 //            MyList.print(copyList, 10);
         }
+
+        MySorter<Integer> mergeSort = new MergeSort<>();
+        measureTime(mergeSort, list);
 
     }
 
