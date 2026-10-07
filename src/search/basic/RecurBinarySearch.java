@@ -4,31 +4,37 @@ import search.common.MySearcher;
 
 import java.util.Comparator;
 
-import static java.util.Arrays.binarySearch;
-
-public class RecurBinarySearch <E extends Comparable<E>> implements MySearcher<E> {
+public class RecurBinarySearch<E extends Comparable<E>> implements MySearcher<E> {
 
     @Override
     public int search(E[] list, E target) {
-        return binarySearch(list, 0, list.length -1, target);
+        // 인자 5개 전달
+        return binarySearch(list, 0, list.length - 1, target, Comparator.naturalOrder());
     }
 
     @Override
-    public int search(E[] list, E key, Comparator<E> comparator) {
-        return 0;
+    public int search(E[] list, E target, Comparator<E> comparator) {
+        // 인자 5개 전달
+        return binarySearch(list, 0, list.length - 1, target, comparator);
     }
 
-    private int binarySearch(E[] list, int low, int high, E target) {
+    // 매개변수를 정확히 5개로 선언
+    private int binarySearch(E[] list, int low, int high, E target, Comparator<E> comparator) {
         if (low > high) {
             return -1;
         }
-        int mid = (low + high) / 2;
-        if (target.equals(list[mid])) {
+
+        int mid = low + (high - low) / 2;
+        int result = comparator.compare(target, list[mid]);
+
+        if (result == 0) {
             return mid;
-        } else if (target.compareTo(list[mid]) < 0) {
-            return binarySearch(list, low, mid -1, target);
+        } else if (result < 0) {
+            // 재귀 호출 시에도 인자 5개 전달
+            return binarySearch(list, low, mid - 1, target, comparator);
         } else {
-            return binarySearch(list, mid + 1, high, target);
+            // 재귀 호출 시에도 인자 5개 전달
+            return binarySearch(list, mid + 1, high, target, comparator);
         }
     }
 }

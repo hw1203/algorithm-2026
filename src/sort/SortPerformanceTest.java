@@ -46,7 +46,7 @@ public class SortPerformanceTest {
         return list;
     }
 
-    private static <E> void measureTime(MySorter<Integer> sorter, Integer[] list) {
+    private static <E extends Comparable<E>> void measureTime(MySorter<Integer> sorter, Integer[] list) {
         long startTime = System.nanoTime();
         sorter.sort(list);
         long endTime = System.nanoTime();

@@ -5,7 +5,7 @@ public record Student (
     String name,
     int age,
     int number,
-    double apa
+    double gpa
 ) implements Comparable<Student> {
 //    @Override
 //    public int compareTo(Student o) {
